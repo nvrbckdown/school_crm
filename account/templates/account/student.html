@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="admin__info justify-content-center">
+        <div class="info__img my-2 col-md-3">
+            <img src="/img/chelovik.png"
+                 alt=""
+                 class="rounded">
+        </div>
+        <div class="main__info justify-content-center">
+            <h1 class="main__title">
+                BASIC INFORMATION</h1>
+            <div class="row mb-3">
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Name</span>
+                    <p class="info__text my-1">{{ student.user.first_name }} {{ student.user.last_name }}</p>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">School</span>
+                    <p class="info__text my-1">{{ student.school }}</p>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Courses</span>
+                    {% for c in course %}
+                            {% for p in payment %}
+                                {% if c.name == p.course.name %}
+                                    {% if p.paid == False %}
+                                        <p class="info__text my-1">{{ c.name }} - To`lanmagan!</p>
+                                    {% else %}
+                                        <p class="info__text my-1">{{ c.name }} - To`langan!</p>
+                                    {% endif %}
+                                {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Phone number</span>
+                    <p class="info__text my-1">{{ student.user.phone_number }}</p>
+                </div>
+            </div>
+            <div class="justify-content-center">
+                <div class="btn-group">
+                    <a class="btn btn-danger" href="{% url 'delete-student' student.id %}" role="button">Delete Student</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

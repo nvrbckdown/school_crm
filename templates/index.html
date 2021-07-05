@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block body %}
+            <div class="section_home p-4">
+                <div class="cards row">
+                    <div class="col-md my-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark align-items-center">Maktablar</h5>
+                                <p class="card-text text-dark">{{ number_of_schools }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md my-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark align-items-center">Fanlar</h5>
+                                <p class="card-text text-dark">{{ number_of_courses }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md my-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark align-items-center">O`quvchilar</h5>
+                                <p class="card-text text-dark">{{ number_of_students }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md my-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark align-items-center">O`qituvchilar</h5>
+                                <p class="card-text text-dark">{{ number_of_teachers }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart__title mt-5 d-flex align-items-center justify-content-between">
+                    <p>Отображать на графике</p>
+                </div>
+
+
+
+                <div class="m-5">
+                    <canvas id="myChart"></canvas>
+                </div>
+
+            </div>
+
+
+            <!--------------------------------- charts section ----------------------------------------->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+            <script>
+                let ctx = document.getElementById('myChart');
+                let myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['11.09.2022', '11.09.2022', '11.09.2022', '11.09.2022', '11.09.2022', '11.09.2022', '11.09.2022', '11.09.2022'],
+                        datasets: [{
+                            label: 'Отображать на графике',
+                            data: [159, 30, 40, 5, 2, 100, 111, 50],
+                            backgroundColor: [
+                                'rgba(30, 124, 204, 1)',
+                                'rgba(240, 191, 18, 1)',
+                                'rgba(243, 80, 80, 1)',
+                                'rgba(30, 124, 204, 1)',
+                                'rgba(240, 191, 18, 1)',
+                                'rgba(243, 80, 80, 1)',
+                                'rgba(30, 124, 204, 1)',
+                                'rgba(240, 191, 18, 1)',
+                                'rgba(243, 80, 80, 1)',
+                                'rgba(30, 124, 204, 1)',
+                                'rgba(240, 191, 18, 1)',
+                                'rgba(243, 80, 80, 1)',
+                            ],
+                            borderColor: [
+
+                                'rgba(30, 124, 204, 1)',
+                                'rgba(240, 191, 18, 1)',
+                                'rgba(243, 80, 80, 1)',
+                                'rgba(30, 124, 204, 1)',
+                                'rgba(240, 191, 18, 1)',
+                                'rgba(243, 80, 80, 1)',
+                                'rgba(30, 124, 204, 1)',
+                                'rgba(240, 191, 18, 1)',
+                                'rgba(243, 80, 80, 1)',
+                                'rgba(30, 124, 204, 1)',
+                                'rgba(240, 191, 18, 1)',
+                                'rgba(243, 80, 80, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    // This more specific font property overrides the global property
+                                    font: {
+                                        size: 14,
+                                        family: 'Futura Pt'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+            <!---------x-x-x-x-x--------------- charts section -------------------x-x-x-x-x------------->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/main.min.js"></script>
+{% endblock %}

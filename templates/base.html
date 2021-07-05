@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    {% load static %}
+    {% include "header.html" %}
+</head>
+<body class="text-center text-white bg-dark">
+<section class="section">
+    <div class="container-xl">
+        <div class="d-flex justify-content-between rounded-top --align-center navbar_section px-3 py-1">
+            <a class="logo">
+                School CRM
+            </a>
+
+            <div class="nav_menu">
+                <a class="menu-item px-3 py-1 rounded active" href="{% url 'index' %}">Bosh Sahifa</a>
+                <a class="menu-item px-3 py-1 rounded" href="/pages/schools.html">Maktablar</a>
+                <a class="menu-item px-3 py-1 rounded" href="{% url 'students' %}">O'quvchilar</a>
+                <a class="menu-item px-3 py-1 rounded" href="/pages/teachers.html">O'qituvchilar</a>
+                <a class="menu-item px-3 py-1 rounded" href="{% url 'courses' %}">Fanlar</a>
+                <a class="menu-item px-3 py-1 rounded" href="/pages/statistics.html">Statistika</a>
+                <a class="menu-item px-3 py-1 rounded" href="{% url 'logout' %}">Chiqish</a>
+            </div>
+        </div>
+    {% block body %}
+
+    {% endblock %}
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="courses_section p-4">
+        <div class="section_title my-1">
+            Courses
+        </div>
+
+        <div class="btn btn-primary my-3">Add Courses</div>
+
+        <div class="table row">
+            {% for c in courses %}
+            <div class="table_head">
+                <div class="row">
+                    <a class="row" href="{{ c.id }}">
+                        <div class="col">{{ c.name }}</div>
+                        <div class="col">{{ c.cost }}</div>
+                        <div class="col">{{ c.school.name }}</div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+{% endblock %}
