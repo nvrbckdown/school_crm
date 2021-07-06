@@ -46,6 +46,21 @@ def get_courses(request):
 
 
 @login_required(login_url='auth/login')
+def get_course(request, id):
+    course = Course.objects.get(id=id)
+    res = {
+        "course": course
+    }
+    return render(request, 'school/course.html', res)
+
+
+@login_required(login_url='auth/login')
+def delete_course(request, id):
+    Course.objects.filter(pk=id).delete()
+    return redirect('courses')
+
+
+@login_required(login_url='auth/login')
 def get_schools(request):
     error = ''
     if request.method == "POST":
@@ -64,3 +79,18 @@ def get_schools(request):
         "error": error
     }
     return render(request, 'school/schools.html', res)
+
+
+@login_required(login_url='auth/login')
+def get_school(request, id):
+    school = School.objects.get(id=id)
+    res = {
+        "school": school
+    }
+    return render(request, 'school/school.html', res)
+
+
+@login_required(login_url='auth/login')
+def delete_school(request, id):
+    School.objects.filter(pk=id).delete()
+    return redirect('schools')

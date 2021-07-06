@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Profile, Student, Parent, Teacher
-from school.models import Course, Payment, School
+from school.models import Course, Payment, School, Status
 from .forms import StudentForm, TeacherForm
 
 def get_students(request):
@@ -18,9 +18,7 @@ def get_students(request):
             student.course.set(form.cleaned_data.get('course'))
             student.save()
             courses = form.cleaned_data.get('course')
-            print(courses)
             for c in courses:
-                print(c)
                 payment = Payment.objects.create(student=student, course_id=c)
                 payment.save()
             return redirect('students')
@@ -97,3 +95,12 @@ def delete_teacher(request, id):
     teacher = Teacher.objects.filter(pk=id).first()
     Profile.objects.filter(id=teacher.user.pk).delete()
     return redirect('teachers')
+
+
+def edit_teacher(request, id):
+    teacher = Teacher.objects.get(pk=id)
+    form = TeacherForm(request.POST)
+    res = {
+        "form": form
+    }
+    return render(request, '', res)

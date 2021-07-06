@@ -13,29 +13,32 @@
             <div class="row mb-3">
                 <div class="col-sm-6 mb-3">
                     <span class="title d-block">Name</span>
-                    <p class="info__text my-1">{{ teacher.user.first_name }} {{ teacher.user.last_name }}</p>
+                    <p class="info__text my-1">{{ school.name }}</p>
                 </div>
                 <div class="col-sm-6 mb-3">
-                    <span class="title d-block">School</span>
-                    <p class="info__text my-1">{{ teacher.school.all }}</p>
+                    <span class="title d-block">Number</span>
+                    <p class="info__text my-1">{{ school.number }}</p>
                 </div>
                 <div class="col-sm-6 mb-3">
-                    <span class="title d-block">Courses</span>
-                    {% for c in course %}
-                        <p class="info__text my-1">{{ c.name }}</p>
-                    {% endfor %}
+                    <span class="title d-block">Region</span>
+                    <p class="info__text my-1">{{ school.region }}</p>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Status</span>
+                    <p class="info__text my-1">{{ school.status }}</p>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Address</span>
+                    <p class="info__text my-1">{{ school.address }}</p>
                 </div>
                 <div class="col-sm-6 mb-3">
                     <span class="title d-block">Phone number</span>
-                    <p class="info__text my-1">{{ teacher.user.phone_number }}</p>
+                    <p class="info__text my-1">{{ school.phone_number }}</p>
                 </div>
             </div>
             <div class="justify-content-center">
                 <div class="btn-group">
-                    <a class="btn btn-danger" href="{% url 'delete-teacher' teacher.id %}" role="button">Delete Teacher</a>
-                </div>
-                <div class="btn-group">
-                    <a class="btn btn-success" href="{% url 'edit-teacher' teacher.id %}" role="button">Edit Teacher</a>
+                    <a class="btn btn-danger" href="{% url 'delete-school' school.id %}" role="button">Delete School</a>
                 </div>
             </div>
         </div>

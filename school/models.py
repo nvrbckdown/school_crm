@@ -34,7 +34,7 @@ class School(models.Model):
     director_name = models.CharField(max_length=255, blank=True, null=True)
     address = models.CharField(max_length=500, blank=True, null=True)
     phone_number = models.CharField(max_length=13, default="+99890", blank=True, null=True)
-    students_number = models.IntegerField(blank=True, null=True)
+    students_number = models.IntegerField(default=0, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Maktab'
@@ -49,6 +49,10 @@ class School(models.Model):
         students = Student.objects.filter(school=selected_school).count()
         selected_school.students_number = students
         selected_school.save()
+        return students
+
+    def takeClosest(num, collection):
+        return min(collection,key=lambda x:abs(x-num))
 
 
 class Course(models.Model):
