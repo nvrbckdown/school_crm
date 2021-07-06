@@ -3,7 +3,7 @@
 {% block body %}
     <div class="students_section p-4">
         <div class="section_title my-1 text-white">
-            Students
+            Schools
         </div>
 
         <!--<div class="btn btn-primary my-3">Add Students</div>-->
@@ -12,17 +12,19 @@
             <div class="table_head">
                 <div class="row">
                     <div class="col text-dark">Name</div>
-                    <div class="col text-dark">Surname</div>
-                    <div class="col text-dark">School</div>
+                    <div class="col text-dark">Number</div>
+                    <div class="col text-dark">Status</div>
+                    <div class="col text-dark">Region</div>
                 </div>
             </div>
             <div class="table_body">
-                {% for student in students %}
-                <a class="row" href="{{ student.id }}">
-                    <div class="col text-white">{{ student.user.first_name }}</div>
-                    <div class="col text-white">{{ student.user.last_name }}</div>
-                    <div class="col text-white">{{ student.school }}</div>
-                </a>
+                {% for school in schools %}
+                    <a class="row" href="{{ school.id }}">
+                        <div class="col text-white">{{ school.name }}</div>
+                        <div class="col text-white">{{ school.number }}</div>
+                        <div class="col text-white">{{ school.status }}</div>
+                        <div class="col text-white">{{ school.region }}</div>
+                    </a>
                 {% endfor %}
             </div>
         </div>
@@ -31,7 +33,7 @@
 
                 <button class="btn__stand active" data-bs-toggle="modal"
                         data-bs-target="#addModalRegion">
-                    Add Student
+                    Add School
                 </button>
             </div>
         </div>
@@ -43,17 +45,13 @@
             <form class="modal-content p-5" method="post">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="section_title">
-                    Add Student
+                    Add Course
                 </div>
                 {% csrf_token %}
-                <label class="text-dark">Username </label>{{ form.username }}<br>
-                <label class="text-dark">Name </label>{{ form.first_name }}<br>
-                <label class="text-dark">Surname </label>{{ form.last_name }}<br>
-                <label class="text-dark">Phone Number </label>{{ form.phone_number }}<br>
-                <label class="text-dark">Email </label>{{ form.email }}<br>
-                <label class="text-dark">School </label>{{ form.school }}<br>
-                <label class="text-dark">Courses </label>{{ form.course }}<br>
-                <label class="text-dark">Password </label>{{ form.password }}<br>
+                {{ form.name }}<br>
+                {{ form.number }}<br>
+                {{ form.status }}<br>
+                {{ form.region }}<br>
                 <br>
                 <span>{{ error }}</span>
                 <button type="submit" class="btn btn-primary">Submit</button>

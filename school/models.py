@@ -44,13 +44,12 @@ class School(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        status = Status.objects.get(rank=self.status.rank)
-        self.students_number = status.rank_number
-        super(School, self).save(*args, **kwargs)
+    def rewrite_students_number(self, school):
+        selected_school = School.objects.filter(name=school.name).first()
+        students = Student.objects.filter(school=selected_school).count()
+        selected_school.students_number = students
+        selected_school.save()
 
-    def rewrite_students_number(self):
-        pass
 
 class Course(models.Model):
     name = models.CharField(max_length=255)

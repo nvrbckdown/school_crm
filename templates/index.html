@@ -5,8 +5,9 @@
                     <div class="col-md my-2">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-dark align-items-center">Maktablar</h5>
+                                <h5 class="card-title text-dark align-items-center">Schools</h5>
                                 <p class="card-text text-dark">{{ number_of_schools }}</p>
+                                <a class="menu-item px-3 py-1 rounded" href="{% url 'schools' %}">More</a>
                             </div>
                         </div>
                     </div>
@@ -15,6 +16,7 @@
                             <div class="card-body">
                                 <h5 class="card-title text-dark align-items-center">Fanlar</h5>
                                 <p class="card-text text-dark">{{ number_of_courses }}</p>
+                                <a class="menu-item px-3 py-1 rounded" href="{% url 'courses' %}">More</a>
                             </div>
                         </div>
                     </div>
@@ -23,6 +25,7 @@
                             <div class="card-body">
                                 <h5 class="card-title text-dark align-items-center">O`quvchilar</h5>
                                 <p class="card-text text-dark">{{ number_of_students }}</p>
+                                <a class="menu-item px-3 py-1 rounded" href="{% url 'students' %}">More</a>
                             </div>
                         </div>
                     </div>
@@ -31,6 +34,7 @@
                             <div class="card-body">
                                 <h5 class="card-title text-dark align-items-center">O`qituvchilar</h5>
                                 <p class="card-text text-dark">{{ number_of_teachers }}</p>
+                                <a class="menu-item px-3 py-1 rounded" href="{% url 'teachers' %}">More</a>
                             </div>
                         </div>
                     </div>

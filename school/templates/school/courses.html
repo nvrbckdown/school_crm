@@ -1,23 +1,63 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
-    <div class="courses_section p-4">
-        <div class="section_title my-1">
+    <div class="students_section p-4">
+        <div class="section_title my-1 text-white">
             Courses
         </div>
-
-        <div class="btn btn-primary my-3">Add Courses</div>
-
         <div class="table row">
-            {% for c in courses %}
             <div class="table_head">
                 <div class="row">
-                    <a class="row" href="{{ c.id }}">
-                        <div class="col">{{ c.name }}</div>
-                        <div class="col">{{ c.cost }}</div>
-                        <div class="col">{{ c.school.name }}</div>
-                    </a>
+                    <div class="col text-dark">Name</div>
+                    <div class="col text-dark">Cost</div>
+                    <div class="col text-dark">School</div>
                 </div>
             </div>
-            {% endfor %}
+            <div class="table_body">
+                {% for c in courses %}
+                    <a class="row" href="{{ c.id }}">
+                        <div class="col text-white">{{ c.name }}</div>
+                        <div class="col text-white">{{ c.cost }}</div>
+                        <div class="col text-white">{{ c.school.name }}</div>
+                    </a>
+                {% endfor %}
+            </div>
         </div>
+        <div class="justify-content-center">
+            <div class="btn-group">
+
+                <button class="btn__stand active" data-bs-toggle="modal"
+                        data-bs-target="#addModalRegion">
+                    Add Course
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addModalRegion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="modal-content p-5" method="post">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="section_title">
+                    Add Course
+                </div>
+                    {% csrf_token %}
+                    {{ form.name }}<br>
+                    {{ form.school }}<br>
+                    {{ form.teacher }}<br>
+                    {{ form.cost }}<br>
+                <br>
+                <span>{{ error }}</span>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-----------x-x-x-x---------------------modal add news--------------x-x-x-x----------------->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/main.min.js' %}"></script>
+
 {% endblock %}

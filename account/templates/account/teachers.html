@@ -3,7 +3,7 @@
 {% block body %}
     <div class="students_section p-4">
         <div class="section_title my-1 text-white">
-            Students
+            Teachers
         </div>
 
         <!--<div class="btn btn-primary my-3">Add Students</div>-->
@@ -13,16 +13,16 @@
                 <div class="row">
                     <div class="col text-dark">Name</div>
                     <div class="col text-dark">Surname</div>
-                    <div class="col text-dark">School</div>
+                    <div class="col text-dark">Phone number</div>
                 </div>
             </div>
             <div class="table_body">
-                {% for student in students %}
-                <a class="row" href="{{ student.id }}">
-                    <div class="col text-white">{{ student.user.first_name }}</div>
-                    <div class="col text-white">{{ student.user.last_name }}</div>
-                    <div class="col text-white">{{ student.school }}</div>
-                </a>
+                {% for teacher in teachers %}
+                    <a class="row" href="{{ teacher.id }}">
+                        <div class="col text-white">{{ teacher.user.last_name }}</div>
+                        <div class="col text-white">{{ teacher.user.first_name }}</div>
+                        <div class="col text-white">{{ teacher.user.phone_number }}</div>
+                    </a>
                 {% endfor %}
             </div>
         </div>
@@ -31,7 +31,7 @@
 
                 <button class="btn__stand active" data-bs-toggle="modal"
                         data-bs-target="#addModalRegion">
-                    Add Student
+                    Add Teacher
                 </button>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <form class="modal-content p-5" method="post">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="section_title">
-                    Add Student
+                    Add Teacher
                 </div>
                 {% csrf_token %}
                 <label class="text-dark">Username </label>{{ form.username }}<br>
@@ -52,7 +52,6 @@
                 <label class="text-dark">Phone Number </label>{{ form.phone_number }}<br>
                 <label class="text-dark">Email </label>{{ form.email }}<br>
                 <label class="text-dark">School </label>{{ form.school }}<br>
-                <label class="text-dark">Courses </label>{{ form.course }}<br>
                 <label class="text-dark">Password </label>{{ form.password }}<br>
                 <br>
                 <span>{{ error }}</span>

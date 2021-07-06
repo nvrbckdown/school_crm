@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import School, Course
 from account.models import Student, Profile, Teacher
-from .models import Course
+from .forms import CourseForm, SchoolForm
+
 
 @login_required(login_url='auth/login')
 def index(request):
@@ -25,8 +26,41 @@ def index(request):
 
 @login_required(login_url='auth/login')
 def get_courses(request):
+    error = ''
+    if request.method == "POST":
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('courses')
+        else:
+            error = 'Something went wrong!'
+
+    form = CourseForm()
     courses = Course.objects.all()
     res = {
-        "courses": courses
+        "courses": courses,
+        "form": form,
+        "error": error
     }
     return render(request, 'school/courses.html', res)
+
+
+@login_required(login_url='auth/login')
+def get_schools(request):
+    error = ''
+    if request.method == "POST":
+        form = SchoolForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('schools')
+        else:
+            error = 'Something went wrong!'
+
+    form = SchoolForm()
+    schools = School.objects.all()
+    res = {
+        "schools": schools,
+        "form": form,
+        "error": error
+    }
+    return render(request, 'school/schools.html', res)
