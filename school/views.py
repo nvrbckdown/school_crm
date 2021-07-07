@@ -93,7 +93,6 @@ def get_school(request, id):
     else:
         error = "Something went wrong!"
     school = School.objects.get(id=id)
-    students = Student.objects.filter(school=school.id).count()
     res = {
         "school": school,
         "error": error,

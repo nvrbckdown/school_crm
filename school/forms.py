@@ -1,5 +1,5 @@
 from . import models
-from django.forms import ModelForm, TextInput, Select, MultipleChoiceField, NumberInput
+from django.forms import ModelForm, TextInput, Select, NumberInput
 
 class SchoolForm(ModelForm):
     class Meta:
@@ -41,8 +41,25 @@ class StatusForm(ModelForm):
         model = models.Status
         fields = ['rank', 'rank_number', 'salary_amount']
 
+        widgets = {
+            'rank': TextInput(
+                attrs={'class': 'form-control',
+                       'placeholder': 'Name'}),
+            'rank_number': NumberInput(
+                attrs={'class': 'form-control'}),
+            'salary_amount': NumberInput(
+                attrs={'class': 'form-control',
+                       'placeholder': 'Cost'})
+        }
+
 
 class RegionForm(ModelForm):
     class Meta:
         model = models.Region
         fields = ['name']
+
+        widgets = {
+            'name': TextInput(
+                attrs={'class': 'form-control',
+                       'placeholder': 'Tashkent'})
+        }
