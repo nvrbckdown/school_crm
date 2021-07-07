@@ -9,8 +9,8 @@ class Region(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Shahar'
-        verbose_name_plural = 'Shaharlar'
+        verbose_name = 'Region'
+        verbose_name_plural = 'Regions'
 
 
 class Status(models.Model):
@@ -37,41 +37,31 @@ class School(models.Model):
     students_number = models.IntegerField(default=0, blank=True, null=True)
 
     class Meta:
-        verbose_name = 'Maktab'
-        verbose_name_plural = 'Maktablar'
+        verbose_name = 'School'
+        verbose_name_plural = 'Schools'
         order_with_respect_to = 'status'
 
     def __str__(self):
         return self.name
 
-    def rewrite_students_number(self, school):
-        selected_school = School.objects.filter(name=school.name).first()
-        students = Student.objects.filter(school=selected_school).count()
-        selected_school.students_number = students
-        selected_school.save()
-        return students
-
-    def takeClosest(num, collection):
-        return min(collection,key=lambda x:abs(x-num))
-
 
 class Course(models.Model):
     name = models.CharField(max_length=255)
-    school = models.ForeignKey(School, on_delete=models.CASCADE, related_name='course', blank=True, null=True)
-    teacher = models.ManyToManyField(Teacher, related_name='teacher', blank=True, null=True)
+    school = models.ForeignKey(School, on_delete=models.CASCADE, related_name='courses', blank=True, null=True)
+    teacher = models.ManyToManyField(Teacher, related_name='courses')
     cost = models.IntegerField()
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = 'Fan'
-        verbose_name_plural = 'Fanla'
+        verbose_name = 'Course'
+        verbose_name_plural = 'Courses'
 
 
 class Payment(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course')
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='student')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='payments')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='payments')
     paid = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -1,4 +1,3 @@
-from . import models
 from django import forms
 from school.models import School, Course
 
@@ -34,7 +33,7 @@ class StudentForm(forms.Form):
 
 
 class TeacherForm(forms.Form):
-    CHOICES = School.objects.all().values_list("id", "name")
+    # CHOICES = School.objects.all().values_list("id", "name")
     username = forms.CharField(max_length=255, widget=forms.TextInput(
         attrs={'class': 'form-control',
                'placeholder': 'AnvarYusupov'}
@@ -59,4 +58,4 @@ class TeacherForm(forms.Form):
         attrs={'class': 'form-control',
                'placeholder': 'ayusupov@gmail.com'}
     ))
-    school = forms.MultipleChoiceField(choices=CHOICES)
+    school = forms.ModelMultipleChoiceField(queryset=School.objects.all(), initial=0)

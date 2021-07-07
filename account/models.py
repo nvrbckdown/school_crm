@@ -18,16 +18,15 @@ class Profile(AbstractUser):
 
 class Teacher(models.Model):
     user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    school = models.ManyToManyField('school.School', related_name='school')
-    status = models.CharField(max_length=1, blank=True, null=True)
+    school = models.ManyToManyField('school.School', related_name='teachers')
 
     def __str__(self):
         return self.user.username
 
 class Student(models.Model):
     user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='student')
-    school = models.ForeignKey('school.School', on_delete=models.CASCADE)
-    course = models.ManyToManyField('school.Course', related_name='student')
+    school = models.ForeignKey('school.School', on_delete=models.CASCADE, related_name='student')
+    course = models.ManyToManyField('school.Course', related_name='students')
 
     def __str__(self):
         return self.user.username

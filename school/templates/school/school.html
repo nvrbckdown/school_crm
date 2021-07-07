@@ -9,7 +9,7 @@
         </div>
         <div class="main__info justify-content-center">
             <h1 class="main__title">
-                BASIC INFORMATION</h1>
+                SCHOOL INFORMATION</h1>
             <div class="row mb-3">
                 <div class="col-sm-6 mb-3">
                     <span class="title d-block">Name</span>
@@ -28,6 +28,10 @@
                     <p class="info__text my-1">{{ school.status }}</p>
                 </div>
                 <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Students</span>
+                    <p class="info__text my-1">{{ school.students_number }}</p>
+                </div>
+                <div class="col-sm-6 mb-3">
                     <span class="title d-block">Address</span>
                     <p class="info__text my-1">{{ school.address }}</p>
                 </div>
@@ -40,8 +44,11 @@
                 <div class="btn-group">
                     <a class="btn btn-danger" href="{% url 'delete-school' school.id %}" role="button">Delete School</a>
                 </div>
+
             </div>
         </div>
+    </div>
+
     </div>
 
 {% endblock %}

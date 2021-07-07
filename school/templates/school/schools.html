@@ -25,7 +25,11 @@
                         <div class="col text-white">{{ school.number }}</div>
                         <div class="col text-white">{{ school.status }}</div>
                         <div class="col text-white">{{ school.region }}</div>
-                        <div class="col text-white">{{ school.students_number }}</div>
+                        {% if school.students_number == None %}
+                            <div class="col text-white">0</div>
+                        {% else %}
+                            <div class="col text-white">{{ school.students_number}}</div>
+                        {% endif %}
                     </a>
                 {% endfor %}
             </div>

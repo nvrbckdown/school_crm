@@ -48,8 +48,10 @@ def get_courses(request):
 @login_required(login_url='auth/login')
 def get_course(request, id):
     course = Course.objects.get(id=id)
+    teachers = Teacher.objects.filter(courses=course.id)
     res = {
-        "course": course
+        "course": course,
+        "teachers": teachers
     }
     return render(request, 'school/course.html', res)
 
@@ -83,9 +85,19 @@ def get_schools(request):
 
 @login_required(login_url='auth/login')
 def get_school(request, id):
+    instance = School.objects.get(id=id)
+    form = SchoolForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect('school')
+    else:
+        error = "Something went wrong!"
     school = School.objects.get(id=id)
+    students = Student.objects.filter(school=school.id).count()
     res = {
-        "school": school
+        "school": school,
+        "error": error,
+        "form": form
     }
     return render(request, 'school/school.html', res)
 

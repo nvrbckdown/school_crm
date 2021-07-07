@@ -9,7 +9,7 @@
         </div>
         <div class="main__info justify-content-center">
             <h1 class="main__title">
-                BASIC INFORMATION</h1>
+                TEACHER INFORMATION</h1>
             <div class="row mb-3">
                 <div class="col-sm-6 mb-3">
                     <span class="title d-block">Name</span>
@@ -17,13 +17,19 @@
                 </div>
                 <div class="col-sm-6 mb-3">
                     <span class="title d-block">School</span>
-                    <p class="info__text my-1">{{ teacher.school.all }}</p>
+                    {% for s in school %}
+                    <p class="info__text my-1">{{ s.name }} - {{ s.status }}</p>
+                    {% endfor %}
                 </div>
                 <div class="col-sm-6 mb-3">
                     <span class="title d-block">Courses</span>
                     {% for c in course %}
-                        <p class="info__text my-1">{{ c.name }}</p>
+                        <p class="info__text my-1">{{ c.name }} - {{ c.cost }}  UZS</p>
                     {% endfor %}
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Salary</span>
+                    <p class="info__text my-1">{{ salary }} UZS</p>
                 </div>
                 <div class="col-sm-6 mb-3">
                     <span class="title d-block">Phone number</span>
