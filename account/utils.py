@@ -62,3 +62,14 @@ def delete_student_service(id):
     school.status = get_school_category(school.students_number - 1)
     school.save()
     Profile.objects.filter(id=student.user.pk).delete()
+
+
+def payment_service(amount, payment):
+    if amount:
+        payment.paid = False
+        payment.amount = int(amount)
+        payment.save()
+    else:
+        payment.paid = True
+        payment.amount = payment.course.cost
+        payment.save()

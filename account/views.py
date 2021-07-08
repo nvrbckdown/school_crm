@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile, Student, Parent, Teacher
 from school.models import Course, Payment, School, Status
 from .forms import StudentForm, TeacherForm
-from .utils import get_salary_service, create_student_service, create_teacher_service, delete_student_service
+from .utils import get_salary_service, create_student_service, create_teacher_service, delete_student_service, \
+    payment_service
 
 
 # <----STUDENT---->
@@ -44,14 +45,7 @@ def get_student(request, id):
 def paid_course(request, id):
     amount = request.POST.get('amount')
     payment = Payment.objects.get(id=id)
-    if amount:
-        payment.paid = False
-        payment.amount = int(amount)
-        payment.save()
-    else:
-        payment.paid = True
-        payment.amount = payment.course.cost
-        payment.save()
+    payment_service(amount, payment)
     return get_student(request=request, id=payment.student_id)
 
 
