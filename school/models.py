@@ -63,6 +63,7 @@ class Payment(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='payments')
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='payments')
     paid = models.BooleanField(default=False)
+    amount = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

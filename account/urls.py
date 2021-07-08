@@ -9,5 +9,7 @@ urlpatterns = [
     path('teachers/', views.get_teachers, name='teachers'),
     path('teachers/<int:id>', views.get_teacher, name='teacher'),
     path('teachers-edit/<int:id>', views.edit_teacher, name='edit-teacher'),
-    path('teachers-delete/<int:id>', views.delete_teacher, name='delete-teacher')
+    path('teachers-delete/<int:id>', views.delete_teacher, name='delete-teacher'),
+    path('parent/<int:id>/', views.get_parent, name='parent'),
+    path('parent-delete/<int:id>/', views.delete_parent, name='delete-parent')
 ]

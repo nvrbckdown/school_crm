@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="admin__info justify-content-center">
+        <div class="info__img my-2 col-md-3">
+            <img src="/img/chelovik.png"
+                 alt=""
+                 class="rounded">
+        </div>
+        <div class="main__info justify-content-center">
+            <h1 class="main__title">
+                STUDENT INFORMATION</h1>
+            <div class="row mb-3">
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Name</span>
+                    <p class="info__text my-1">{{ parent.user.first_name }} {{ parent.user.last_name }}</p>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Student</span>
+                    {% for s in students %}
+                    <p class="info__text my-1">{{ s.user.first_name }} {{ s.user.last_name }}</p>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Phone number</span>
+                    <p class="info__text my-1">{{ parent.user.phone_number }}</p>
+                </div>
+            </div>
+            <div class="justify-content-center">
+                <div class="btn-group">
+                    <a class="btn btn-danger" href="{% url 'delete-parent' parent.id %}" role="button">Delete Parent</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

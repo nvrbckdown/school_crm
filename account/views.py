@@ -30,19 +30,28 @@ def get_student(request, id):
     student = Student.objects.get(id=id)
     course = Course.objects.filter(students=student.pk)
     payment = Payment.objects.filter(student=student.pk)
+    parent = Parent.objects.filter(student_id=student.pk).first()
     res = {
         "student": student,
         "course": course,
-        "payment": payment
+        "payment": payment,
+        "parent": parent
     }
     return render(request, 'account/student.html', res)
 
 
 @login_required(login_url='auth/login')
 def paid_course(request, id):
+    amount = request.POST.get('amount')
     payment = Payment.objects.get(id=id)
-    payment.paid = True
-    payment.save()
+    if amount:
+        payment.paid = False
+        payment.amount = int(amount)
+        payment.save()
+    else:
+        payment.paid = True
+        payment.amount = payment.course.cost
+        payment.save()
     return get_student(request=request, id=payment.student_id)
 
 
@@ -103,3 +112,21 @@ def edit_teacher(request, id):
         "form": form
     }
     return render(request, '', res)
+
+# <----PARENT---->
+@login_required(login_url='auth/login')
+def get_parent(request, id):
+    parent = Parent.objects.get(id=id)
+    students = Student.objects.filter(parents=parent)
+    res = {
+        "parent": parent,
+        "students": students
+    }
+    return render(request, 'account/parent.html', res)
+
+
+@login_required(login_url='auth/login')
+def delete_parent(request, id):
+    parent = Parent.objects.filter(pk=id).first()
+    Profile.objects.filter(id=parent.user.pk).delete()
+    return redirect('index')

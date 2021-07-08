@@ -34,4 +34,4 @@ class Student(models.Model):
 
 class Parent(models.Model):
     user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='student_parent')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='parents')

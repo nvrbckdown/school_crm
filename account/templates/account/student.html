@@ -25,10 +25,15 @@
                             {% for p in payment %}
                                 {% if c.name == p.course.name %}
                                     {% if p.paid == False %}
-                                        <p class="info__text my-1">{{ c.name }} - To`lanmagan!</p>
-                                        <a class="btn btn-success" href="{% url 'paid' p.id %}">PAID</a>
+                                        <p class="info__text my-1">{{ c.name }} {{ c.cost }} dan {{ p.amount }} UZS - PAID!</p>
+                                        <form method="POST" action="{% url 'paid' p.id %}">
+                                            {% csrf_token %}
+                                            <label for="amount">Amount: </label>
+                                            <input id="amount" type="text" name="amount">
+                                            <input class="btn btn-success" type="submit" value="PAY"/>
+                                        </form>
                                     {% else %}
-                                        <p class="info__text my-1">{{ c.name }} {{ c.cost }} UZS - To`langan!</p>
+                                            <p class="info__text my-1">{{ c.name }} {{ c.cost }} UZS - PAID!</p>
                                     {% endif %}
                                 {% endif %}
                         {% endfor %}
@@ -37,6 +42,14 @@
                 <div class="col-sm-6 mb-3">
                     <span class="title d-block">Phone number</span>
                     <p class="info__text my-1">{{ student.user.phone_number }}</p>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="title d-block">Parent</span>
+                    {% if parent %}
+                        <a class="btn btn-info text-white" href="{% url 'parent' parent.id %}" role="button">{{ parent.user.first_name }} {{ parent.user.last_name }}</a>
+                    {% else %}
+                        <p class="info__text my-1">Parent not registered!</p>
+                    {% endif %}
                 </div>
             </div>
             <div class="justify-content-center">
