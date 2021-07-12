@@ -25,11 +25,11 @@
                             {% for p in payment %}
                                 {% if c.name == p.course.name %}
                                     {% if p.paid == False %}
-                                        <p class="info__text my-1">{{ c.name }} {{ c.cost }} dan {{ p.amount }} UZS - PAID!</p>
+                                        <p class="info__text my-1">{{ c.name }} - {{ p.amount }} out of {{ c.cost }} UZS PAID!</p>
                                         <form method="POST" action="{% url 'paid' p.id %}">
                                             {% csrf_token %}
                                             <label for="amount">Amount: </label>
-                                            <input id="amount" type="text" name="amount">
+                                            <input id="amount" type="text" name="amount"    >
                                             <input class="btn btn-success" type="submit" value="PAY"/>
                                         </form>
                                     {% else %}
