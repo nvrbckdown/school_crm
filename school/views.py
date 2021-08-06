@@ -21,6 +21,7 @@ def index(request):
         }
         return render(request, "index.html", res)
     else:
+        print("HelloWORLD!")
         return redirect('login')
 
 
